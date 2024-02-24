@@ -1,0 +1,77 @@
+<form [formGroup]="addressForm" (ngSubmit)="submitDetails()"  class="example-form mx-auto my-5">
+    <h2>Enter Address Details</h2>
+    <table class="example-full-width" cellspacing="0"><tr>
+      <td><mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>First name</mat-label>
+        <input  formControlName="firstName" matInput>
+        <mat-error *ngIf="addressForm.get('firstName')?.hasError('required')">
+          First Name is required
+        </mat-error>
+      </mat-form-field></td>
+      <td><mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>Last Name</mat-label>
+        <input formControlName="lastName" matInput>
+        <mat-error *ngIf="addressForm.get('lastName')?.hasError('required')">
+          Last Name is required
+        </mat-error>
+      </mat-form-field></td>
+    </tr></table>
+  
+    <p>
+      <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>Address</mat-label>
+        <textarea formControlName="address1" matInput placeholder="Ex. 100 Main St"></textarea>
+        <mat-error *ngIf="addressForm.get('address1')?.hasError('required')">
+          Address is required
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>Address 2</mat-label>
+        <textarea formControlName="address2" matInput></textarea>
+        <mat-error *ngIf="addressForm.get('address2')?.hasError('required')">
+          Address is required
+        </mat-error>
+      </mat-form-field>
+    </p>
+  
+    <table class="example-full-width" cellspacing="0"><tr>
+      <td><mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>City</mat-label>
+        <input formControlName="city" matInput placeholder="Ex. Lucknow">
+        <mat-error *ngIf="addressForm.get('city')?.hasError('required')">
+          City is required
+        </mat-error>
+      </mat-form-field></td>
+      <td><mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>State</mat-label>
+        <input formControlName="state" matInput placeholder="Ex. Uttar Pradesh">
+        <mat-error *ngIf="addressForm.get('state')?.hasError('required')">
+          State is required
+        </mat-error>
+      </mat-form-field></td>
+    </tr></table>
+    <table class="example-full-width" cellspacing="0"><tr>
+      <td><mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>Country</mat-label>
+        <input formControlName="country" matInput placeholder="Ex. India">
+        <mat-error *ngIf="addressForm.get('country')?.hasError('required')">
+          Country is required
+        </mat-error>
+      </mat-form-field></td>
+      <td><mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>Postal Code</mat-label>
+        <input formControlName="postalcode" matInput #postalCode maxlength="5" placeholder="Ex. 226022" >
+        <mat-hint align="end">{{postalCode.value.length}} / 6</mat-hint>
+        <mat-error *ngIf="addressForm.get('postalcode')?.hasError('required')">
+          Postal Code is required
+        </mat-error>
+      </mat-form-field></td>
+    </tr></table>
+    <!-- <button mat-raised-button type="submit">Place Order</button> -->
+    <button [disabled]="!addressForm.valid" color="primary" (click)="emptyCart()" *ngIf="isLoggedIn$ | async as isLogged" mat-raised-button type="submit">Place Order</button>
+    <button color="primary" (click)="emptyCart()" routerLink="/accounts/login" *ngIf="!(isLoggedIn$ | async) as isLogged" mat-raised-button type="submit">Login To Place Order</button>
+  </form>
+
+
+
+ 

@@ -1,0 +1,41 @@
+<div class="container my-5">
+    <form [formGroup]="addProductForm" (ngSubmit)="addProduct()">
+      <h2>Enter Product Details</h2>
+      <mat-form-field appearance="outline">
+        <mat-label>Name of the Product</mat-label>
+        <input formControlName="name" matInput>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Size</mat-label>
+        <mat-select formControlName="size">
+          <mat-option value="Small">Small</mat-option>
+          <mat-option value="Medium">Medium</mat-option>
+          <mat-option value="Large">Large</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Category</mat-label>
+        <mat-select formControlName="category">
+          <mat-option value="Birthday">Birthday</mat-option>
+          <mat-option value="Anniversary">Anniversary</mat-option>
+          <mat-option value="Love">Love</mat-option>
+          <mat-option value="Marriage">Marriage</mat-option>
+          <mat-option value="Grand Opening">Grand Opening</mat-option>
+          <mat-option value="Get Well Soon">Get Well Soon</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Description</mat-label>
+        <textarea formControlName="description" matInput></textarea>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Price</mat-label>
+        <input formControlName="price" type="number" matInput>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Image URL</mat-label>
+        <input formControlName="imageUrl" matInput>
+      </mat-form-field>      
+      <button color="primary" mat-raised-button type="submit">Add Product</button>
+    </form>
+</div>

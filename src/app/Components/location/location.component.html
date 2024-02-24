@@ -1,0 +1,71 @@
+<div *ngIf="isAdmin && toggle" class="container">
+    <form [formGroup]="addressForm" (ngSubmit)="submitDetails()"  class="example-form mx-auto my-5">
+        <h2>Enter Location Details</h2>
+        <button color="primary" (click)="onClick()" mat-raised-button>View All Locations</button>
+        <table class="example-full-width" cellspacing="0"><tr>
+          <td><mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Shop Name</mat-label>
+            <input  formControlName="name" matInput>
+          </mat-form-field></td>
+          <td><mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Shop Email</mat-label>
+            <input  formControlName="email" matInput>
+          </mat-form-field></td>
+        </tr></table>
+        <p>
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Address</mat-label>
+            <textarea formControlName="address" matInput placeholder="Ex. 100 Main St"></textarea>
+          </mat-form-field>
+        </p>
+        <table class="example-full-width" cellspacing="0"><tr>
+          <td><mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Phone</mat-label>
+            <input formControlName="phone" matInput placeholder="Ex. Lucknow">
+          </mat-form-field></td>
+          <td><mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>City</mat-label>
+            <input formControlName="city" matInput placeholder="Ex. Lucknow">
+          </mat-form-field></td>
+        </tr></table>
+        <table class="example-full-width" cellspacing="0"><tr>
+          <td><mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Country</mat-label>
+            <input formControlName="country" matInput placeholder="Ex. India">
+          </mat-form-field></td>
+          <td><mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Postal Code</mat-label>
+            <input formControlName="pinCode" matInput #postalCode maxlength="6" placeholder="Ex. 226022" >
+            <mat-hint align="end">{{postalCode.value.length}} / 6</mat-hint>
+          </mat-form-field></td>
+        </tr></table>
+        <!-- <button mat-raised-button type="submit">Place Order</button> -->
+        <button color="primary" *ngIf="isLoggedIn$ | async as isLogged" mat-raised-button type="submit">Save Location</button>
+      </form>
+</div>
+<mat-card *ngIf="!isAdmin">
+  <mat-card-title class="my-3">Find Us At Below Locations</mat-card-title>
+</mat-card>
+<div *ngIf="!toggle" class="container">
+  <mat-card *ngIf="isAdmin">
+    <mat-card-title class="my-3">Click Below To Add More Shop Locations</mat-card-title>
+    <button color="primary" (click)="toggle=!toggle" mat-raised-button>Add Location</button>
+  </mat-card>
+<div *ngFor="let l of locations" class="d-inline-flex flex-row justify-content-evenly my-3 mx-2">
+  <mat-card class="mat-elevation-z8 example-card" >
+    <mat-card-header>
+      <mat-card-title>{{l.name}}</mat-card-title>
+      <mat-card-subtitle>{{l.email}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>{{l.address}}</p>
+      <p>{{l.city}}</p>
+      <p>{{l.country}}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button color="primary" (click)="contactUs(l.phone)" mat-raised-button>{{l.phone}}</button>
+      <button *ngIf="isAdmin" (click)="delete(l.id)"  color="warn" mat-raised-button>Delete</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+</div>

@@ -1,0 +1,23 @@
+<mat-card  [class.mat-elevation-z8]="true" class="example-card ">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>{{product.name}}</mat-card-title>
+    </mat-card-header>
+    <img class="prodImg" mat-card-image [src]="product.imageUrl" >
+    <mat-card-content>
+      <mat-card-subtitle>Price : {{product.price}} INR</mat-card-subtitle>
+      <p>
+        {{product.description | slice:0:30}}
+      </p>
+    </mat-card-content>
+    <mat-card-content>
+      <p>
+        Size : {{product.size}}
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button matRipple color="primary" mat-raised-button  mat-button (click)="addToCart(product)">ADD TO CART</button>
+      <!-- <button color="primary" mat-raised-button *ngIf="isLoggedIn$ | async as isLogged" mat-button (click)="addToCart(product)">ADD TO CART</button> 
+      <button color="primary" mat-raised-button *ngIf="!(isLoggedIn$ | async) as isLogged" mat-button routerLink="/accounts/login">Login to Add to Cart</button> -->
+    </mat-card-actions>
+</mat-card>

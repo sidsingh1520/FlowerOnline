@@ -1,0 +1,84 @@
+<mat-card *ngIf="empty">
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="mx-5">
+                <h2>Product Image</h2>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="mx-5">
+                <h2>Product Details</h2>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="mx-5">
+                <h2>Quantity</h2>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="mx-5">
+                <h2>Price</h2>
+            </div>
+        </div>
+    </div>
+</mat-card>
+<div *ngIf="empty">
+<mat-card  *ngFor="let o of order" >
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="mx-5">
+                <img class="img-cart" [src]="o.imageUrl" alt="">
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="mx-5">
+                <h2>{{o.name}}</h2>
+                <h5>{{o.description}}</h5>
+            </div>
+        </div>
+        <div class="col-lg-2">
+            <div class="mx-5">
+                <mat-form-field appearance="outline" class="example-form-field">
+                <mat-label>Quantity</mat-label>
+                <input min="1" max="3" (click)="totalPrice()" matInput type="number" [(ngModel)]="o.quantity">
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="col-lg-2">
+            <button
+            mat-icon-button
+            (click)="deleteProduct(o.id)"
+          >
+            <mat-icon aria-label="delete">delete</mat-icon>
+            </button>
+        </div>
+        <div class="col-lg-2">
+            <div class="mx-5">
+                {{o.quantity * o.price}} INR
+            </div>
+        </div>
+    </div>
+</mat-card>
+</div>
+<div *ngIf="empty"  class="container my-4">
+    <div class="row">
+
+        <div class="col-8">              
+        </div>
+        <div class="col-1"></div>
+        <div class="col-3 ">
+            <h2>Total Price : {{total}} INR</h2>
+            <button routerLink="/address" (click)="checkout()"  color="primary" mat-raised-button >Checkout</button>
+        </div>
+    </div>
+
+</div>
+
+<div *ngIf="!empty" class="container  d-flex flex-column align-items-center justify-content-center vh-100">
+    <img class="img" src="../../../assets/images/cart.jpg" alt="Empty Cart">
+    <h1>Your Cart is Empty</h1>
+    <div>
+        <button color="primary" routerLink="/home" mat-raised-button > Start Shopping </button>
+        <button color="primary" *ngIf="!(isLoggedIn$ | async) as isLogged" routerLink="/accounts/login" mat-raised-button > Login </button>
+    </div>
+</div>
